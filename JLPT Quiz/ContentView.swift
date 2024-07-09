@@ -30,15 +30,6 @@ struct ContentView: View {
             }
             .tag(1)
             
-            NavigationView {
-                SelectVideo()
-            }
-            .navigationViewStyle(StackNavigationViewStyle())
-            .tabItem {
-                Image(systemName: "play.display")
-                Text("lecture")
-            }
-            .tag(2)
         }
     }
 }

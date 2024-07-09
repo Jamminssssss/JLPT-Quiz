@@ -10,7 +10,6 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct JLPTN2: View {
-    @State private var quizInfo: Info?
     @State private var questions: [Question] = []
     @State private var startQuiz: Bool = false
     @AppStorage("log_status") private var logStatus: Bool = false
@@ -24,98 +23,90 @@ struct JLPTN2: View {
     @State private var progressString: String = "0%"
     
     var body: some View {
-        if let _ = quizInfo{
-            VStack(spacing: 10){
-                Button {
-                                dismiss()
-                            } label: {
-                                Image(systemName: "xmark")
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.red)
-                            }
-                            .hAlign(.leading)
+        VStack(spacing: 10){
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.red)
+            }
+            .hAlign(.leading)
+            
                 Text("N2 文字、語彙、文法、読解")
                     .font(.title)
                     .fontWeight(.semibold)
                     .hAlign(.leading)
                     .foregroundColor(.black)
 
-                GeometryReader{
-                                let size = $0.size
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(.black.opacity(0.2))
-                        
-                        Rectangle()
-                            .fill(Color(.blue))
-                            .frame(width: progress * size.width,alignment: .leading)
-                        
-                        Text(progressString)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
-                                .clipShape(Capsule())
-                            }
-                            .frame(height: 20)
-                            .padding(.top,5)
-                
-                GeometryReader{
-                    let _ = $0.size
+            GeometryReader{
+                let size = $0.size
+                ZStack(alignment: .leading) {
+                    Rectangle()
+                        .fill(.black.opacity(0.2))
                     
-                    ForEach(questions.indices,id: \.self) { index in
-                        if currentIndex == index{
-                            QuestionView(question: questions[currentIndex])
-                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                        }
-                    }
+                    Rectangle()
+                        .fill(Color(.green))
+                        .frame(width: progress * size.width,alignment: .leading)
+                    
+                    Text(progressString)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
-                .padding(.horizontal,-15)
-                .padding(.vertical,15)
+                .clipShape(Capsule())
+            }
+            .frame(height: 20)
+            .padding(.top,6)
+            
+            GeometryReader{
+                let _ = $0.size
                 
-                CustomButton(title: currentIndex == (questions.count - 1) ? "끝" : "다음 문제") {
-                    if currentIndex == (questions.count - 1){
-                        showScoreCard.toggle()
-                    }else{
-                        withAnimation(.easeInOut){
-                            currentIndex += 1
-                            progress = CGFloat(currentIndex) / CGFloat(questions.count - 1)
-                            progressString = String(format: "%.0f%%", progress * 100)
-                        }
+                ForEach(questions.indices,id: \.self) { index in
+                    if currentIndex == index{
+                        QuestionView(question: questions[currentIndex])
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     }
                 }
             }
-            .padding(15)
-            .hAlign(.center).vAlign(.top)
-            .background {
-                Color.green
-                    .ignoresSafeArea()
-            }
-            .environment(\.colorScheme, .dark)
-            .fullScreenCover(isPresented: $showScoreCard) {
-                ScoreCardView(score: score / CGFloat(questions.count) * 100) {
-                    dismiss()
-                    onFinish()
-                }
-            }
-        }else{
-            VStack(spacing: 5){
-                ProgressView()
-                Text("잠시만 기다려 주세요")
-                    .font(.caption2)
-                    .foregroundColor(.gray)
-            }
-            .task {
-                do{
-                    try await fetchData()
-                }catch{
-                    print(error.localizedDescription)
+            .padding(.horizontal,-15)
+            .padding(.vertical,15)
+            
+            CustomButton(title: currentIndex == (questions.count - 1) ? "끝" : "다음 문제") {
+                if currentIndex == (questions.count - 1){
+                    showScoreCard.toggle()
+                }else{
+                    withAnimation(.easeInOut){
+                        currentIndex += 1
+                        progress = CGFloat(currentIndex) / CGFloat(questions.count - 1)
+                        progressString = String(format: "%.0f%%", progress * 100)
+                    }
                 }
             }
         }
+        .padding(15)
+        .hAlign(.center).vAlign(.top)
+        .background {
+            Color.green
+                .ignoresSafeArea()
+        }
+        .environment(\.colorScheme, .dark)
+        .fullScreenCover(isPresented: $showScoreCard) {
+            ScoreCardView(score: score / CGFloat(questions.count) * 100) {
+                dismiss()
+                onFinish()
+            }
+        }
+        .task {
+            do{
+                try await fetchData()
+            }catch{
+                print(error.localizedDescription)
+            }
+        }
     }
-
+    
     @ViewBuilder
     func QuestionView(question: Question)->some View{
         ScrollView {
@@ -199,7 +190,6 @@ struct JLPTN2: View {
     
     func fetchData() async throws {
         try await loginUserAnonymous()
-        let info = try await Firestore.firestore().collection("Quiz").document("Info").getDocument().data(as: Info.self)
         var questions = try await Firestore.firestore().collection("Quiz").document("Info").collection("Questions1").getDocuments().documents.compactMap{
             try $0.data(as: Question.self)
         }
@@ -213,7 +203,6 @@ struct JLPTN2: View {
         
         
         await MainActor.run(body: {
-            self.quizInfo = info
             self.questions = shuffledQuestions
         })
     }
