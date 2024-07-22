@@ -92,6 +92,8 @@
 		16B4ED1D2B02F9AC006DD1EC /* SelectAudioTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B4ED1C2B02F9AC006DD1EC /* SelectAudioTest.swift */; };
 		16B4ED1F2B02F9C1006DD1EC /* JLPTN1AUDIOTEST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B4ED1E2B02F9C1006DD1EC /* JLPTN1AUDIOTEST.swift */; };
 		16EB684E2AD683D6008E695E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EB684D2AD683D6008E695E /* CustomButton.swift */; };
+		16EDEC8E2C4A6AC3007416D9 /* SelectableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EDEC8D2C4A6AC3007416D9 /* SelectableTextView.swift */; };
+		16F012BA2C3D384D00CFAF44 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16F012B92C3D384D00CFAF44 /* GoogleService-Info.plist */; };
 		16F7A73E2B08737D003F8E67 /* JLPTN2AUDIOTEST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F7A73D2B08737D003F8E67 /* JLPTN2AUDIOTEST.swift */; };
 		16F7A7402B08738C003F8E67 /* JLPTN3AUDIOTEST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F7A73F2B08738C003F8E67 /* JLPTN3AUDIOTEST.swift */; };
 		16F7A7422B08739C003F8E67 /* JLPTN4AUDIOTEST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F7A7412B08739C003F8E67 /* JLPTN4AUDIOTEST.swift */; };
@@ -181,6 +183,8 @@
 		16B4ED1C2B02F9AC006DD1EC /* SelectAudioTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAudioTest.swift; sourceTree = "<group>"; };
 		16B4ED1E2B02F9C1006DD1EC /* JLPTN1AUDIOTEST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLPTN1AUDIOTEST.swift; sourceTree = "<group>"; };
 		16EB684D2AD683D6008E695E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		16EDEC8D2C4A6AC3007416D9 /* SelectableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableTextView.swift; sourceTree = "<group>"; };
+		16F012B92C3D384D00CFAF44 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		16F7A73D2B08737D003F8E67 /* JLPTN2AUDIOTEST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLPTN2AUDIOTEST.swift; sourceTree = "<group>"; };
 		16F7A73F2B08738C003F8E67 /* JLPTN3AUDIOTEST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLPTN3AUDIOTEST.swift; sourceTree = "<group>"; };
 		16F7A7412B08739C003F8E67 /* JLPTN4AUDIOTEST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLPTN4AUDIOTEST.swift; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 				16861F5C2AD2C849001B0F81 /* Model */,
 				160ADA4F2AD18957006FC41D /* JLPT_QuizApp.swift */,
 				160ADA512AD18957006FC41D /* ContentView.swift */,
+				16F012B92C3D384D00CFAF44 /* GoogleService-Info.plist */,
 				160ADA532AD18958006FC41D /* Assets.xcassets */,
 				160ADA552AD18958006FC41D /* Preview Content */,
 			);
@@ -357,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				16861F642AD2D2E9001B0F81 /* Home.swift */,
+				16EDEC8D2C4A6AC3007416D9 /* SelectableTextView.swift */,
 				16EB684D2AD683D6008E695E /* CustomButton.swift */,
 				16861FB32AD3A528001B0F81 /* Select.swift */,
 				16861F682AD2D648001B0F81 /* JLPTN1.swift */,
@@ -471,6 +477,7 @@
 				1678AD742C296A1200862B0D /* N1Q9.mp3 in Resources */,
 				16428A6F2C2A887100F0D7E6 /* N5Q10.mp3 in Resources */,
 				16428A772C2A887100F0D7E6 /* N5Q9.mp3 in Resources */,
+				16F012BA2C3D384D00CFAF44 /* GoogleService-Info.plist in Resources */,
 				16428A732C2A887100F0D7E6 /* N5Q5.mp3 in Resources */,
 				1678AD762C296A1200862B0D /* N1Q6.mp3 in Resources */,
 				1678AD8C2C2A6CEE00862B0D /* N2Q7.mp3 in Resources */,
@@ -532,6 +539,7 @@
 				16B4ED1D2B02F9AC006DD1EC /* SelectAudioTest.swift in Sources */,
 				16B4ED1F2B02F9C1006DD1EC /* JLPTN1AUDIOTEST.swift in Sources */,
 				16861F702AD2D672001B0F81 /* JLPTN4.swift in Sources */,
+				16EDEC8E2C4A6AC3007416D9 /* SelectableTextView.swift in Sources */,
 				160ADA502AD18957006FC41D /* JLPT_QuizApp.swift in Sources */,
 				16F7A7402B08738C003F8E67 /* JLPTN3AUDIOTEST.swift in Sources */,
 				16861F722AD2D67B001B0F81 /* JLPTN5.swift in Sources */,
@@ -687,7 +695,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0.4;
+				MARKETING_VERSION = 5.0.8;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jaeminpark.JLPT-Quiz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -726,7 +734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0.4;
+				MARKETING_VERSION = 5.0.8;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jaeminpark.JLPT-Quiz";
 				PRODUCT_NAME = "$(TARGET_NAME)";

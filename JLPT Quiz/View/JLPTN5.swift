@@ -40,7 +40,7 @@ struct JLPTN5: View {
                     .hAlign(.leading)
                     .foregroundColor(.black)
 
-            GeometryReader{
+            GeometryReader {
                 let size = $0.size
                 ZStack(alignment: .leading) {
                     Rectangle()
@@ -48,7 +48,7 @@ struct JLPTN5: View {
                     
                     Rectangle()
                         .fill(Color(.green))
-                        .frame(width: progress * size.width,alignment: .leading)
+                        .frame(width: progress * size.width, alignment: .leading)
                     
                     Text(progressString)
                         .fontWeight(.bold)
@@ -58,26 +58,26 @@ struct JLPTN5: View {
                 .clipShape(Capsule())
             }
             .frame(height: 20)
-            .padding(.top,6)
+            .padding(.top, 6)
             
-            GeometryReader{
+            GeometryReader {
                 let _ = $0.size
                 
-                ForEach(questions.indices,id: \.self) { index in
-                    if currentIndex == index{
-                        QuestionView(question: questions[currentIndex])
+                ForEach(questions.indices, id: \.self) { index in
+                    if currentIndex == index {
+                        QuestionView(question: questions[currentIndex], fontSizeChange: $fontSizeChange)
                             .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     }
                 }
             }
-            .padding(.horizontal,-15)
-            .padding(.vertical,15)
+            .padding(.horizontal, -15)
+            .padding(.vertical, 15)
             
             CustomButton(title: currentIndex == (questions.count - 1) ? "끝" : "다음 문제") {
-                if currentIndex == (questions.count - 1){
+                if currentIndex == (questions.count - 1) {
                     showScoreCard.toggle()
-                }else{
-                    withAnimation(.easeInOut){
+                } else {
+                    withAnimation(.easeInOut) {
                         currentIndex += 1
                         progress = CGFloat(currentIndex) / CGFloat(questions.count - 1)
                         progressString = String(format: "%.0f%%", progress * 100)
@@ -88,7 +88,7 @@ struct JLPTN5: View {
         .padding(15)
         .hAlign(.center).vAlign(.top)
         .background {
-            Color.mint
+            Color.white
                 .ignoresSafeArea()
         }
         .environment(\.colorScheme, .dark)
@@ -99,16 +99,16 @@ struct JLPTN5: View {
             }
         }
         .task {
-            do{
+            do {
                 try await fetchData()
-            }catch{
+            } catch {
                 print(error.localizedDescription)
             }
         }
     }
 
     @ViewBuilder
-    func QuestionView(question: Question)->some View{
+    func QuestionView(question: Question, fontSizeChange: Binding<CGFloat>) -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 15) {
                 Text("Question \(currentIndex + 1)/\(questions.count)")
@@ -116,15 +116,12 @@ struct JLPTN5: View {
                     .foregroundColor(.gray)
                     .hAlign(.leading)
                 
-                // 줄바꿈 문자를 사용하여 여러 줄의 텍스트를 표시합니다.
-                Text(question.question.replacingOccurrences(of: "\\n", with: "\n"))
-                    .font(.system(size: 25 + fontSizeChange))
-                    .fontWeight(.semibold)
-                    .foregroundColor(.black)
-            }
-                VStack(spacing: 12){
-                    ForEach(question.options,id: \.self){option in
-                        ZStack{
+                SelectableTextView(text: question.question.replacingOccurrences(of: "\\n", with: "\n"), fontSizeChange: fontSizeChange)
+                    .frame(height: 200) // 필요에 따라 높이 조정
+                    
+                VStack(spacing: 12) {
+                    ForEach(question.options, id: \.self) { option in
+                        ZStack {
                             OptionView(option, question.answer == option && question.tappedAnswer != "" ? Color.green : Color.black)
                             
                             if question.tappedAnswer == option && question.tappedAnswer != question.answer {
@@ -133,18 +130,18 @@ struct JLPTN5: View {
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            guard questions[currentIndex].tappedAnswer == "" else{return}
-                            withAnimation(.easeInOut){
+                            guard questions[currentIndex].tappedAnswer == "" else { return }
+                            withAnimation(.easeInOut) {
                                 questions[currentIndex].tappedAnswer = option
                                 
-                                if question.answer == option{
+                                if question.answer == option {
                                     score += 1.0
                                 }
                             }
                         }
                     }
                 }
-                .padding(.vertical,10)
+                .padding(.vertical, 10)
             }
             .padding(15)
             .hAlign(.center)
@@ -152,52 +149,51 @@ struct JLPTN5: View {
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
                     .fill(Color.white.opacity(0.6))
             }
-            .padding(.horizontal,15)
+            .padding(.horizontal, 15)
             .gesture(DragGesture().onEnded { value in
                 let swipeDistance = value.translation.width / 10
                 if swipeDistance > 0 {
-                    // Increase font size when swiping right
-                    fontSizeChange = min(swipeDistance, 10) // Limit maximum font size increase
+                    // 오른쪽으로 스와이프하면 글꼴 크기 증가
+                    fontSizeChange.wrappedValue = min(swipeDistance, 10) // 글꼴 크기 증가 제한
                 } else {
-                    // Decrease font size when swiping left
-                    fontSizeChange = max(swipeDistance, -10) // Limit maximum font size decrease
+                    // 왼쪽으로 스와이프하면 글꼴 크기 감소
+                    fontSizeChange.wrappedValue = max(swipeDistance, -10) // 글꼴 크기 감소 제한
                 }
             })
         }
-    
-    
+    }
+
     @ViewBuilder
-    func OptionView(_ option: String,_ tint: Color)->some View{
+    func OptionView(_ option: String, _ tint: Color) -> some View {
         ScrollView {
             Text(option)
                 .fixedSize(horizontal: false, vertical: true)
                 .font(.system(size: 25 + fontSizeChange))
                 .foregroundColor(tint)
-                .padding(.horizontal,5)
-                .padding(.vertical,10)
+                .padding(.horizontal, 5)
+                .padding(.vertical, 10)
                 .hAlign(.center)
                 .background {
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .fill(tint.opacity(0.15))
                         .background {
                             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .stroke(tint.opacity(tint == .gray ? 0.15 : 1),lineWidth: 2)
+                                .stroke(tint.opacity(tint == .gray ? 0.15 : 1), lineWidth: 2)
                         }
                 }
         }
     }
 
-    
     func fetchData() async throws {
         try await loginUserAnonymous()
-        var questions = try await Firestore.firestore().collection("Quiz").document("Info").collection("Questions4").getDocuments().documents.compactMap{
+        var questions = try await Firestore.firestore().collection("Quiz").document("Info").collection("Questions").getDocuments().documents.compactMap {
             try $0.data(as: Question.self)
         }
         
-        // Shuffle the questions
+        // 질문을 섞습니다.
         questions.shuffle()
         
-        // Make a copy of the shuffled questions
+        // 섞인 질문의 복사본을 만듭니다.
         let shuffledQuestions = questions
         
         await MainActor.run(body: {
@@ -215,3 +211,4 @@ struct JLPTN5: View {
 #Preview {
     ContentView()
 }
+

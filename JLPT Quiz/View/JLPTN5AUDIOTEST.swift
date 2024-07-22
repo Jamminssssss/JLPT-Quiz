@@ -96,7 +96,7 @@ struct JLPTN5AUDIOTEST: View {
         .hAlign(.center)
         .vAlign(.top)
         .background {
-            Color.mint
+            Color.white
                 .ignoresSafeArea()
         }
         .environment(\.colorScheme, .dark)

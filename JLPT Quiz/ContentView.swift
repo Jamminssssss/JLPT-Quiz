@@ -29,7 +29,6 @@ struct ContentView: View {
                 Text("聴解")
             }
             .tag(1)
-            
         }
     }
 }

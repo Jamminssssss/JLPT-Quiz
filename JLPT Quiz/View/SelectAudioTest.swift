@@ -19,11 +19,11 @@ struct SelectAudioTest: View {
             Button(action: {
                 showJLPTN1AUDIOTEST.toggle()
             }) {
-                Text("N1 聴解")
-                    .font(.title)
+                Image("JLPTN1AUDIOTESTimage")
+                    .resizable()
+                    .scaledToFit()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    .background(Color.blue)
-                    .foregroundColor(.black)
+                    .clipped()
             }
             .fullScreenCover(isPresented: $showJLPTN1AUDIOTEST) {
                 JLPTN1AUDIOTEST(onFinish: {
@@ -33,11 +33,11 @@ struct SelectAudioTest: View {
             Button(action: {
                 showJLPTN2AUDIOTEST.toggle()
             }) {
-                Text("N2 聴解")
-                    .font(.title)
+                Image("JLPTN2AUDIOTESTimage")
+                    .resizable()
+                    .scaledToFit()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    .background(Color.green)
-                    .foregroundColor(.black)
+                    .clipped()
             }
             .fullScreenCover(isPresented: $showJLPTN2AUDIOTEST) {
                 JLPTN2AUDIOTEST(onFinish: {
@@ -47,11 +47,11 @@ struct SelectAudioTest: View {
             Button(action: {
                 showJLPTN3AUDIOTEST.toggle()
             }) {
-                Text("N3 聴解")
-                    .font(.title)
+                Image("JLPTN3AUDIOTESTimage")
+                    .resizable()
+                    .scaledToFit()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    .background(Color.orange)
-                    .foregroundColor(.black)
+                    .clipped()
             }
             .fullScreenCover(isPresented: $showJLPTN3AUDIOTEST) {
                 JLPTN3AUDIOTEST(onFinish: {
@@ -61,11 +61,11 @@ struct SelectAudioTest: View {
             Button(action: {
                 showJLPTN4AUDIOTEST.toggle()
             }) {
-                Text("N4 聴解")
-                    .font(.title)
+                Image("JLPTN4AUDIOTESTimage")
+                    .resizable()
+                    .scaledToFit()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    .background(Color.purple)
-                    .foregroundColor(.black)
+                    .clipped()
             }
             .fullScreenCover(isPresented: $showJLPTN4AUDIOTEST) {
                 JLPTN4AUDIOTEST(onFinish: {
@@ -75,11 +75,11 @@ struct SelectAudioTest: View {
             Button(action: {
                 showJLPTN5AUDIOTEST.toggle()
             }) {
-                Text("N5 聴解")
-                    .font(.title)
+                Image("JLPTN5AUDIOTESTimage")
+                    .resizable()
+                    .scaledToFit()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    .background(Color.mint)
-                    .foregroundColor(.black)
+                    .clipped()
             }
             .fullScreenCover(isPresented: $showJLPTN5AUDIOTEST) {
                 JLPTN5AUDIOTEST(onFinish: {
