@@ -8,18 +8,20 @@
 import SwiftUI
 import Foundation
 
-struct Question: Identifiable, Codable{
+struct Question: Identifiable, Codable {
     var id: UUID = .init()
     var question: String
     var options: [String]
     var answer: String
-    
-    var tappedAnswer: String =  ""
-    
-    enum CodingKeys: CodingKey {
+    var tappedAnswer: String = ""
+    var imageURL: String? // 이미지 URL을 추가합니다.
+
+    // CodingKeys를 업데이트하여 새로운 필드(imageURL)를 포함합니다.
+    enum CodingKeys: String, CodingKey {
         case question
         case options
         case answer
+        case imageURL
     }
 }
 

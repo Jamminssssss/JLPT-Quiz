@@ -94,7 +94,7 @@ struct JLPTN2AUDIOTEST: View {
         .hAlign(.center)
         .vAlign(.top)
         .background {
-            Color.green
+            Color.white
                 .ignoresSafeArea()
         }
         .environment(\.colorScheme, .dark)

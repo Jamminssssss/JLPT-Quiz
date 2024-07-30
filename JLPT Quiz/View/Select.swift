@@ -21,11 +21,11 @@ struct Select: View {
             Button(action: {
                 showJLPTN1.toggle()
             }) {
-                Text("N1 文字、語彙、文法、読解")
-                    .font(.title)
+                Image("JLPTN1image")
+                    .resizable()
+                    .scaledToFit()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    .background(Color.blue)
-                    .foregroundColor(.black)
+                    .clipped()
             }
             .fullScreenCover(isPresented: $showJLPTN1) {
                 JLPTN1(onFinish: {
@@ -37,11 +37,11 @@ struct Select: View {
             Button(action: {
                 showJLPTN2.toggle()
             }) {
-                Text("N2 文字、語彙、文法、読解")
-                    .font(.title)
+                Image("JLPTN2image")
+                    .resizable()
+                    .scaledToFit()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    .background(Color.green)
-                    .foregroundColor(.black)
+                    .clipped()
             }
             .fullScreenCover(isPresented: $showJLPTN2) {
                 JLPTN2(onFinish: {
@@ -53,11 +53,11 @@ struct Select: View {
             Button(action: {
                 showJLPTN3.toggle()
             }) {
-                Text("N3 文字、語彙、文法、読解")
-                    .font(.title)
+                Image("JLPTN3image")
+                    .resizable()
+                    .scaledToFit()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    .background(Color.orange)
-                    .foregroundColor(.black)
+                    .clipped()
             }
             .fullScreenCover(isPresented: $showJLPTN3) {
                 JLPTN3(onFinish: {
@@ -69,11 +69,11 @@ struct Select: View {
             Button(action: {
                 showJLPTN4.toggle()
             }) {
-                Text("N4 文字、語彙、文法、読解")
-                    .font(.title)
+                Image("JLPTN4image")
+                    .resizable()
+                    .scaledToFit()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    .background(Color.purple)
-                    .foregroundColor(.black)
+                    .clipped()
             }
             .fullScreenCover(isPresented: $showJLPTN4) {
                 JLPTN4(onFinish: {
@@ -85,11 +85,11 @@ struct Select: View {
             Button(action: {
                 showJLPTN5.toggle()
             }) {
-                Text("N5 文字、語彙、文法、読解")
-                    .font(.title)
+                Image("JLPTN5image")
+                    .resizable()
+                    .scaledToFit()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    .background(Color.mint)
-                    .foregroundColor(.black)
+                    .clipped()
             }
             .fullScreenCover(isPresented: $showJLPTN5) {
                 JLPTN5(onFinish: {
